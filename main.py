@@ -2,20 +2,20 @@ from binance.enums import SYMBOL_TYPE_SPOT
 from chaves import *
 import pandas as pd
 
-arq="td/planilha.json"
+arq="planilha.json"
 
-#def existir_em_salvas(,postado):
-#    with open(arq, "r") as f:
-#        salvos = json.load(f)
-#    resposta = False
-#    for i in range (len(salvos)):
-#        #print(f"(em existir) {salvos[i]['twet']}\n(tamanho) {len(salvos)}  i:{i}")
-#        if salvos[i]['twet']==postado:
-#            resposta=True
-#            break
-#    return resposta
+def existir_em_arquivo(coisa,arq):
+  with open(arq, "r") as f:
+    salvos = json.load(f)
+  resposta = False
+  for i in range (len(salvos)):
+    if salvos[i]==coisa:
+      resposta=True
+      break
+  return resposta
 
 def salvar_operacao(par,pnl):
+  if(existir_em_arquivo(({par:pnl}),arq)==False):
     with open(arq, "r") as f:
         salvos = json.load(f)
 
